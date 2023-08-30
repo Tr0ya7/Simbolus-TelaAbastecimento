@@ -1,4 +1,6 @@
 .main {
+    max-height: 90%;
+
     .title {
         font-weight: bold;
         font-size: medium;
@@ -55,9 +57,11 @@
         }
 
         .obs {
-            input {
-                min-width: 300px;
-                min-height: 50px;
+            margin: 5% 1.9%;
+
+            textarea {
+                width: 28em;
+                height: 10em;
             }
         }
     }

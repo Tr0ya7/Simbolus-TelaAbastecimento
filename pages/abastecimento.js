@@ -2,85 +2,114 @@ import styles from '@/styles/pages/abastecimento.module.scss'
 import PropInput from './components/propInput'
 import Image from 'next/image'
 import PropArrow from './components/propArrow'
+import Prop_DropMenu from './components/prop_dropMenu'
 
 export default function Abastecimento() {
-    function arrowOnClick() { 
+    function arrowOnClick() {
         if (employersArrow) {
-            employersArrow.addEventListener('click', () => {
-                const employersArrow = document.querySelector('#employersArrow')
-                var rotate = employersArrow.style.rotate
+            const employersArrow = document.querySelector('#employersArrow')
+            const employers = document.querySelector('#employers_dropMenu')
+            var currentDisplay = employers.style.display
+            var rotate = employersArrow.style.rotate
 
+            employersArrow.addEventListener('click', () => {
                 if (rotate === 'unset') {
                     employersArrow.style.rotate = '180deg'
                 } else {
                     employersArrow.style.rotate = 'unset'
                 }
+
+                if (currentDisplay === 'none') {
+                    employers.style.display = 'block'
+                } else {
+                    employers.style.display = 'none'
+                }
             })
         }
 
         if (typeArrow) {
-            typeArrow.addEventListener('click', () => {
-                const typeArrow = document.querySelector('#typeArrow')
-                var rotate = typeArrow.style.rotate
+            const typeArrow = document.querySelector('#typeArrow')
+            const types = document.querySelector('#types_dropMenu')
+            var currentDisplay = types.style.display
+            var rotate = typeArrow.style.rotate
 
+            typeArrow.addEventListener('click', () => {
                 if (rotate === 'unset') {
                     typeArrow.style.rotate = '180deg'
                 } else {
                     typeArrow.style.rotate = 'unset'
                 }
+
+                if (currentDisplay === 'none') {
+                    types.style.display = 'block'
+                } else {
+                    types.style.display = 'none'
+                }
             })
         }
 
         if (localArrow) {
-            localArrow.addEventListener('click', () => {
-                const localArrow = document.querySelector('#localArrow')
-                var rotate = localArrow.style.rotate
+            const localArrow = document.querySelector('#localArrow')
+            const local = document.querySelector('#local_dropMenu')
+            var currentDisplay = local.style.display
+            var rotate = localArrow.style.rotate
 
+            localArrow.addEventListener('click', () => {
                 if (rotate === 'unset') {
                     localArrow.style.rotate = '180deg'
                 } else {
                     localArrow.style.rotate = 'unset'
                 }
+
+                if (currentDisplay === 'none') {
+                    local.style.display = 'block'
+                } else {
+                    local.style.display = 'none'
+                }
             })
         }
 
-        if (vehicleArrow) {
-            vehicleArrow.addEventListener('click', () => {
-                const vehicleArrow = document.querySelector('#vehicleArrow')
-                var rotate = vehicleArrow.style.rotate
+        if (suplyTypeArrow) {
+            const suplyTypeArrow = document.querySelector('#suplyTypeArrow')
+            const suplyType = document.querySelector('#suplyType_dropMenu')
+            var currentDisplay = suplyType.style.display
+            var rotate = suplyTypeArrow.style.rotate
 
+            suplyTypeArrow.addEventListener('click', () => {
                 if (rotate === 'unset') {
-                    vehicleArrow.style.rotate = '180deg'
+                    suplyTypeArrow.style.rotate = '180deg'
                 } else {
-                    vehicleArrow.style.rotate = 'unset'
+                    suplyTypeArrow.style.rotate = 'unset'
+                }
+
+                if (currentDisplay === 'none') {
+                    suplyType.style.display = 'block'
+                } else {
+                    suplyType.style.display = 'none'
                 }
             })
         }
         
         if (fuelArrow) {
-            fuelArrow.addEventListener('click', () => {
-                const fuelArrow = document.querySelector('#fuelArrow')
-                var rotate = fuelArrow.style.rotate
+            const fuelArrow = document.querySelector('#fuelArrow')
+            const fuel = document.querySelector('#fuel_dropMenu')
+            var currentDisplay = fuel.style.display
+            var rotate = fuelArrow.style.rotate
 
+            fuelArrow.addEventListener('click', () => {
                 if (rotate === 'unset') {
                     fuelArrow.style.rotate = '180deg'
                 } else {
                     fuelArrow.style.rotate = 'unset'
                 }
+
+                if (currentDisplay === 'none') {
+                    fuel.style.display = 'block'
+                } else {
+                    fuel.style.display = 'none'
+                }
             })
         }
-    }
-
-    const dataInput = document.querySelector('.dataInput')
-
-    if (dataInput) {
-        dataInput.addEventListener('keypress', () => {
-            value = dataInput.value.length
-    
-            if (dataInput.length === 3) {
-                input.value = '/'
-            }
-        })
     }
 
     return (
@@ -101,8 +130,9 @@ export default function Abastecimento() {
                     <p>
                         Funcionário Responsável
                     </p>
-                    <PropInput />
+                    <PropInput id="employersInput" onClick={ arrowOnClick } disabled="disabled" />
                     <PropArrow className={styles.arrow} id="employersArrow" onClick={ arrowOnClick } />
+                    <Prop_DropMenu id="employers_dropMenu" text="..." text1="..." />
                 </div>
                 <div>
                     <p>
@@ -120,29 +150,33 @@ export default function Abastecimento() {
                     <p>
                         Tipo
                     </p>
-                    <PropInput />
+                    <PropInput value="Veículo" onClick={ arrowOnClick } disabled="disabled" />
                     <PropArrow className={styles.arrow} id="typeArrow" onClick={ arrowOnClick } />
+                    <Prop_DropMenu id="types_dropMenu" text="Veículo" text1="Gerador" />
                 </div>
                 <div>
                     <p>
                         Local
                     </p>
-                    <PropInput />
+                    <PropInput onClick={ arrowOnClick } disabled="disabled" />
                     <PropArrow className={styles.arrow} id="localArrow" onClick={ arrowOnClick } />
+                    <Prop_DropMenu id="local_dropMenu" text="Local" text1="Terceiros" />
                 </div>
                 <div>
                     <p>
                         Veículo
                     </p>
-                    <PropInput />
-                    <PropArrow className={styles.arrow} id="vehicleArrow" onClick={ arrowOnClick } />
+                    <PropInput onClick={ arrowOnClick } disabled="disabled" />
+                    <PropArrow className={styles.arrow} id="suplyTypeArrow" onClick={ arrowOnClick } />
+                    <Prop_DropMenu id="suplyType_dropMenu" text="..." text1="..." />
                 </div>
                 <div>
                     <p>
                         Combustível
                     </p>
-                    <PropInput />
+                    <PropInput onClick={ arrowOnClick } disabled="disabled" />
                     <PropArrow className={styles.arrow} id="fuelArrow" onClick={ arrowOnClick } />
+                    <Prop_DropMenu id="fuel_dropMenu" text="..." text1="..." />
                 </div>
                 <div className={styles.midInformations}>
                     <div>
@@ -181,7 +215,7 @@ export default function Abastecimento() {
                         <p>
                             Observação
                         </p>
-                        <input type="text" />
+                        <textarea type="text" />
                     </div>
                 </div>
             </div>
