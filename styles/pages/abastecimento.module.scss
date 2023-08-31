@@ -1,31 +1,36 @@
+@import '../preDefinitions.scss';
+
 .main {
     max-height: 90%;
 
-    .title {
-        font-weight: bold;
-        font-size: medium;
-        margin: 3%;
-    }
-
-    .hr {
-        padding: none;
+    header {
+        div {
+            @include display3;
+            flex-wrap: nowrap;
+            font-weight: $font-weight;
+            justify-content: space-between;
+            font-size: medium;
+            align-items: center;
+    
+            .leave {
+                font-size: small;
+            }
+        }
     }
 
     .informations {
-        display: flex;
-        flex-wrap: wrap;
-        margin: 3%;
+        @include display3;
 
         div {
             margin-left: 5%;
 
             p {
-                margin: 3%;
+                margin: $margin;
                 font-size: 12.61px;
             }
             
             input {
-                margin-left: 3%;
+                margin-left: $margin;
             }
 
             img {
@@ -43,9 +48,8 @@
         }
 
         .midInformations {
+            @include display3;
             margin: 10% 1%;
-            display: flex;
-            flex-wrap: wrap;
             
             .expense {
                 margin-left: 27%;

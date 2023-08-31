@@ -1,5 +1,15 @@
-@mixin flexCenter() {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+$display: flex;
+$margin: 3%;
+$font-weight: bold;
+
+@mixin display3() {
+    display: $display;
+    margin: $margin;
+    flex-wrap: wrap;
+}
+
+@mixin border10px() {
+    border: 1px solid #ccc;
+    padding: 10px;
+    text-align: center;
 }

@@ -109,10 +109,19 @@ export default function Abastecimento() {
 
     return (
         <div className={styles.main}>
-            <p className={styles.title}>
-                Abastecimento
-            </p>
-            <hr />
+            <header>
+                <div>
+                    <p className={styles.title}>
+                        Abastecimento
+                    </p>
+                    <Link href="/">
+                        <p className={styles.leave}>
+                            Sair
+                        </p>
+                    </Link>
+                </div>
+                <hr />
+            </header>
             <div className={styles.informations}>
                 <div>
                     <p>

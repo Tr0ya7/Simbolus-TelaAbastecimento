@@ -1,19 +1,17 @@
+@import '../preDefinitions.scss';
+
 .table {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
 
     .field {
-        border: 1px solid #ccc;
+        @include border10px;
         background-color: #f0f0f0;
-        padding: 10px;
-        text-align: center;
-        font-weight: bold;
+        font-weight: $font-weight;
     }
 
     .subField {
-        border: 1px solid #ccc;
+        @include border10px;
         background-color: #ffffff;
-        padding: 10px;
-        text-align: center;
     }
 }

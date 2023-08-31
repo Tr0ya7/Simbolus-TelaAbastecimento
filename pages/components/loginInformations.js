@@ -1,5 +1,5 @@
 import styles from '@/styles/components/loginInformations.module.scss'
-import DefaultInput from './propInput'
+import PropInput from './propInput'
 
 export default function LoginInformations() {
     return (
@@ -7,11 +7,11 @@ export default function LoginInformations() {
             <p>
                 Funcionário
             </p>
-            <DefaultInput />
+            <PropInput />
             <p>
                 Senha
             </p>
-            <DefaultInput />
+            <PropInput />
         </div>
     )
 }
