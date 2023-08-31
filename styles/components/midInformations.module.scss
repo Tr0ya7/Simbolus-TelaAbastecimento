@@ -1,0 +1,10 @@
+@import '../preDefinitions.scss';
+
+.midInformations {
+    @include display3;
+    margin: 10% 1%;
+    
+    .expense {
+        margin-left: 27%;
+    }
+}

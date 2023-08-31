@@ -1,0 +1,5 @@
+@import '../preDefinitions.scss';
+
+.informations {
+    @include display3;
+}

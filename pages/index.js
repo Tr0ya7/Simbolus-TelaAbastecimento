@@ -18,11 +18,6 @@ export default function Home() {
       <main className={`${styles.main} ${inter.className}`}>
         <Image src="/images/worker.jpg" width="450" height="250" alt="worker" />
         <LoginInformations />
-        <Link href="./abastecimento">
-          <button type="submit">
-            ENTRAR
-          </button>
-        </Link>
       </main>
     </>
   )

@@ -1,0 +1,16 @@
+@import '../preDefinitions.scss';
+
+.main {
+    div {
+        @include display3;
+        flex-wrap: nowrap;
+        font-weight: $font-weight;
+        justify-content: space-between;
+        font-size: medium;
+        align-items: center;
+
+        .leave {
+            font-size: small;
+        }
+    }
+}
