@@ -2,7 +2,7 @@
 
 	require_once "Conexao.php";
 	require_once "../Class/Funcionario.php";
-	require_once "../Tools/funcoes.php";
+	//require_once "../Tools/funcoes.php";
 
 	class FuncionarioDAO
 	{
@@ -56,7 +56,7 @@
 	            $funcionario->setFunCodigo($row->FUN_CODIGO);
 				$funcionario->setFunNome($row->FUN_NOME);
 				$funcionario->setFunCnpj($row->FUN_CNPJ);
-				$funcionario->setFunSenha($row->FUN_SENHA;
+				$funcionario->setFunSenha($row->FUN_SENHA);
 				$funcionario->setFunPrimeiroNome($row->FUN_PRIMEIRO_NOME);
 				$funcionarioprimeira[] = $funcionario;
 	        }        
@@ -174,4 +174,6 @@
 			return $funcionarios;
 		}
 	}
+
+	echo 'teste';
 ?>

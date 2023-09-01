@@ -3,9 +3,20 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/pages/Home.module.scss'
 import Image from 'next/image'
 import LoginInformations from './components/loginInformations'
-import Link from 'next/link'
+//import db from '../db_conection/DAO/teste.php'
 
 const inter = Inter({ subsets: ['latin'] })
+
+fetch('../db_conection/DAO/teste.php')
+.then(response => {
+  if (!response.ok) {
+    console.log('Erro ao fazer a solicitação');
+  }
+  return response.json()
+})
+.then(data => {
+  console.log(data);
+})
 
 export default function Home() {
   return (
