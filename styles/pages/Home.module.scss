@@ -1,3 +1,34 @@
 .main {
-    min-height: 100vh;
+    min-height: 106.5vh;
+
+    div {
+        text-align: center;
+
+        img {
+        }
+    }
+    
+    @media (max-width: 550px) {
+        img {
+            height: 17em;
+        }
+    }
+    
+    @media (min-width: 551px) {
+        img {
+            height: 23em;
+        }
+    }
+    
+    @media (min-width: 1150px) {
+        img {
+            height: 26em;
+        }
+    }
+    
+    @media (min-width: 1450px) {
+        img {
+            height: 30em;
+        }
+    }
 }

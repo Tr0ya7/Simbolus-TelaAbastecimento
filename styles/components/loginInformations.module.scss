@@ -1,20 +1,20 @@
 @import '../preDefinitions.scss';
 
 .loginInformations {
-    margin: 11% 31% 0; //revisar
+    text-align: center;
 
     button {
-        display: $display;
-        margin: 30px auto;
-        background-color: rgb(37, 150, 190);
-        color: white;
-        padding: $margin;
-        border: none;
-        border-radius: 5px;
-        transition: .1s;
+        margin: 1.5em 0;
 
-        &:active {
-            background-color: rgb(27, 112, 143);
+        @media (max-width: 550px) {
+            button {
+                padding: 2.5%;
+            }
         }
+    }
+
+    .forgotPass {
+        text-decoration: underline;
+        color: rgb(37, 150, 190);
     }
 }

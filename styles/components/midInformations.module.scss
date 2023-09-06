@@ -2,9 +2,7 @@
 
 .midInformations {
     @include display3;
-    margin: 10% 1%;
-    
-    .expense {
-        margin-left: 27%;
-    }
+    justify-content: space-evenly;
+    width: 50%;
+    margin: 5% auto;
 }

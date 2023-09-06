@@ -3,14 +3,18 @@ import TopInformations from './topInformations'
 import MidInformations from './midInformations'
 import StaticInformations from './staticInformations'
 import Obs from './obs'
+import PropButton from './propButton'
 
 export default function Informations() {
     return (
-        <div className={styles.informations}>
+        <form className={styles.informations}>
             <TopInformations />
             <MidInformations />
             <StaticInformations />
             <Obs />
-        </div>
+            <PropButton>
+                Salvar
+            </PropButton>
+        </form>
     )
 }

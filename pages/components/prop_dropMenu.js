@@ -1,13 +1,13 @@
 import styles from '@/styles/components/prop_dropMenu.module.scss'
 
-export default function Prop_DropMenu({ id, onClick, firstOptionOnClick, text, secondOptionOnClick, text1 }) {
+export default function Prop_DropMenu(props) {
     return (
-        <ul className={styles.menu} id={ id } onClick={ onClick }>
-            <li className="first_option" onClick={ firstOptionOnClick }>
-                { text }
+        <ul className={styles.menu} id={ props.id } onClick={ props.onClick }>
+            <li className={ props.classNameFirstOption } onClick={ props.firstOptionOnClick }>
+                { props.text }
             </li>
-            <li id="second_option" onClick={ secondOptionOnClick }>
-                { text1 }
+            <li className={ props.classNameSecondOption } onClick={ props.secondOptionOnClick }>
+                { props.text1 }
             </li>
         </ul>
     )

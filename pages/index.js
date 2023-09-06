@@ -3,20 +3,8 @@ import { Inter } from 'next/font/google'
 import styles from '@/styles/pages/Home.module.scss'
 import Image from 'next/image'
 import LoginInformations from './components/loginInformations'
-//import db from '../db_conection/DAO/teste.php'
 
 const inter = Inter({ subsets: ['latin'] })
-
-fetch('../db_conection/DAO/teste.php')
-.then(response => {
-  if (!response.ok) {
-    console.log('Erro ao fazer a solicitação');
-  }
-  return response.json()
-})
-.then(data => {
-  console.log(data);
-})
 
 export default function Home() {
   return (
@@ -27,7 +15,9 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={`${styles.main} ${inter.className}`}>
-        <Image src="/images/worker.jpg" width="450" height="250" alt="worker" />
+        <div> 
+          <Image src="/images/worker.jpg" width="640" height="427" alt="worker" />
+        </div>
         <LoginInformations />
       </main>
     </>
