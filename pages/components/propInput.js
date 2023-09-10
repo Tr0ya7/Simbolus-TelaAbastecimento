@@ -5,5 +5,14 @@ export default function PropInput(props) {
         props.change(event.target.value)
     }
 
-    return <input className={styles.input} id={ props.id } value={ props.value } type={ props.type } maxLength={ props.maxLength } disabled={ props.disabled } onChange={ inputOnChange } />
+    return <input 
+                className={styles.input} 
+                id={ props.id } 
+                value={ props.value } 
+                type={ props.type } 
+                maxLength={ props.maxLength } 
+                disabled={ props.disabled } 
+                onChange={ inputOnChange } 
+                required="true"
+            />
 }

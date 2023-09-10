@@ -2,7 +2,7 @@ import styles from '@/styles/components/prop_dropMenu.module.scss'
 
 export default function Prop_DropMenu(props) {
     return (
-        <ul className={styles.menu} id={ props.id } onClick={ props.onClick }>
+        <ul className={styles.menu} id={ props.id }>
             <li className={ props.classNameFirstOption } onClick={ props.firstOptionOnClick }>
                 { props.text }
             </li>

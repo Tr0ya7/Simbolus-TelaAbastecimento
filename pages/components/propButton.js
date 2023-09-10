@@ -6,7 +6,7 @@ export default function PropButton(props) {
     }
 
     return (
-        <button className={styles.button} onSubmit={ buttonOnSubmit }>
+        <button className={styles.button} type={ props.type } onSubmit={ buttonOnSubmit }>
             { props.children }
         </button>
     ) 

@@ -1,5 +1,10 @@
 @import '../preDefinitions.scss';
 
 .informations {
-    padding: 3em 8em;
+    padding: 3em 1em;
+
+    .button {
+        text-align: center;
+        margin-top: 1.5em;
+    }
 }

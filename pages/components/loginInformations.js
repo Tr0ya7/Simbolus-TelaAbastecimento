@@ -13,16 +13,16 @@ export default function LoginInformations() {
         <div className={styles.loginInformations}>
             <div>
                 <p>
-                    CPF
+                    CNPJ
                 </p>
-                <PropInput type="number" value={ cnpj } maxLength="11" change={ value => setCnpj(value) } />
+                <PropInput value={ cnpj } maxLength="11" change={ value => setCnpj(value) } />
                 <p>
                     Senha
                 </p>
                 <PropInput type="password" />
             </div>
             <Link href="./abastecimento">
-                <PropButton href="./abastecimento">
+                <PropButton type="submit">
                     Entrar
                 </PropButton>
             </Link>

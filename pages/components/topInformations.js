@@ -4,6 +4,8 @@ import PropArrow from './propArrow'
 import Prop_DropMenu from './prop_dropMenu'
 import PropInput from './propInput'
 import styles from '@/styles/components/topInformations.module.scss'
+import LoginInformations from './loginInformations'
+import { measure } from './midInformations'
 
 export default function TopInformations() {
     function typeArrowOnClick() {
@@ -82,14 +84,77 @@ export default function TopInformations() {
         }
     }
 
+    function typeFirstValueOnClick() {
+        const input = document.querySelector('#typeInput')
+        var suply = document.querySelector('.suply')
+        const firstValue = document.querySelector('.type_firstOption')
+        //var measure = document.querySelector('.measure') //fazer funcionar
+
+        input.value = firstValue.textContent
+        suply.innerHTML = "Veículo"
+        //measure.innerHTML = "Quilometragem" //fazer funcionar
+    }
+
+    function typeSecondValueOnClick() {
+        const input = document.querySelector('#typeInput')
+        var suply = document.querySelector('.suply')
+        const secondValue = document.querySelector('.type_secondOption')
+        //var measure = document.querySelector('.measure') //fazer funcionar
+
+        input.value = secondValue.textContent
+        suply.innerHTML = "Gerador"
+        //measure.innerHTML = "Horimetro" //fazer funcionar
+    }
+
+    function localFirstValueOnClick() {
+        const input = document.querySelector('#localInput')
+        const firstValue = document.querySelector('.local_firstOption')
+
+        input.value = firstValue.textContent
+    }
+
+    function localSecondValueOnClick() {
+        const input = document.querySelector('#localInput')
+        const secondValue = document.querySelector('.local_secondOption')
+
+        input.value = secondValue.textContent
+    }
+
+    function suplyTypeFirstValueOnClick() {
+        const input = document.querySelector('#suplyTypeInput')
+        const firstValue = document.querySelector('.suplyType_firstOption')
+
+        input.value = firstValue.textContent
+    }
+    
+    function suplyTypeSecondValueOnClick() {
+        const input = document.querySelector('#suplyTypeInput')
+        const secondValue = document.querySelector('.suplyType_secondOption')
+        
+        input.value = secondValue.textContent
+    }
+
+    function fuelFirstValueOnClick() {
+        const input = document.querySelector('#fuelInput')
+        const firstValue = document.querySelector('.fuel_firstOption')
+    
+        input.value = firstValue.textContent
+    }
+    
+    function fuelSecondValueOnClick() {
+        const input = document.querySelector('#fuelInput')
+        const secondValue = document.querySelector('.fuel_secondOption')
+    
+        input.value = secondValue.textContent
+    }
+
     return (
         <div className={styles.topInformations}>
             <div className={styles.main}>
                 <p>
                     Funcionário Responsável
                 </p>
-                <PropInput id="employersInput" disabled="disabled" />
-                <Prop_DropMenu id="employers_dropMenu" text="..." text1="..." />
+                <PropInput id="employersInput" disabled="disabled" value={ LoginInformations.cnpj } />
             </div>
             <div className={styles.main}>
                 <p>
@@ -109,31 +174,63 @@ export default function TopInformations() {
                 </p>
                 <PropInput id="typeInput" value="Veículo" disabled="disabled" />
                 <PropArrow className={styles.arrow} id="typeArrow" onClick={ typeArrowOnClick } />
-                <Prop_DropMenu id="types_dropMenu" classNameFirstOption="type_firstOption" text="Veículo" classNameSecondOption="type_secondOption" text1="Gerador" />
+                <Prop_DropMenu 
+                    id="types_dropMenu" 
+                    classNameFirstOption="type_firstOption"
+                    firstOptionOnClick={ typeFirstValueOnClick }
+                    text="Veículo"
+                    classNameSecondOption="type_secondOption" 
+                    secondOptionOnClick={ typeSecondValueOnClick }
+                    text1="Gerador"
+                />
             </div>
             <div className={styles.main}>
                 <p>
                     Local
                 </p>
-                <PropInput disabled="disabled" />
+                <PropInput id="localInput" disabled="disabled" />
                 <PropArrow className={styles.arrow} id="localArrow" onClick={ localArrowOnClick } />
-                <Prop_DropMenu id="local_dropMenu" text="Local" text1="Terceiros" />
+                <Prop_DropMenu 
+                    id="local_dropMenu" 
+                    classNameFirstOption="local_firstOption"
+                    firstOptionOnClick={ localFirstValueOnClick }
+                    text="Local"
+                    classNameSecondOption="local_secondOption"
+                    secondOptionOnClick={ localSecondValueOnClick }
+                    text1="Terceiros"
+                />
             </div>
             <div className={styles.main}>
-                <p>
+                <p className="suply">
                     Veículo
                 </p>
-                <PropInput disabled="disabled" />
+                <PropInput id="suplyTypeInput" disabled="disabled" />
                 <PropArrow className={styles.arrow} id="suplyTypeArrow" onClick={ suplyTypeArrowOnClick } />
-                <Prop_DropMenu id="suplyType_dropMenu" text="..." text1="..." />
+                <Prop_DropMenu 
+                    id="suplyType_dropMenu"
+                    classNameFirstOption="suplyType_firstOption"
+                    firstOptionOnClick={ suplyTypeFirstValueOnClick }
+                    text="..." 
+                    classNameSecondOption="suplyType_secondOption"
+                    secondOptionOnClick={ suplyTypeSecondValueOnClick }
+                    text1="..." 
+                />
             </div>
             <div className={styles.main}>
                 <p>
                     Combustível
                 </p>
-                <PropInput disabled="disabled" />
+                <PropInput id="fuelInput" disabled="disabled" />
                 <PropArrow className={styles.arrow} id="fuelArrow" onClick={ fuelArrowOnClick } />
-                <Prop_DropMenu id="fuel_dropMenu" text="..." text1="..." />
+                <Prop_DropMenu
+                    id="fuel_dropMenu"
+                    classNameFirstOption="fuel_firstOption"
+                    firstOptionOnClick={ fuelFirstValueOnClick }
+                    text="..."
+                    classNameSecondOption="fuel_secondOption"
+                    secondOptionOnClick={ fuelSecondValueOnClick }
+                    text1="..."
+                />
             </div>
         </div>
     )

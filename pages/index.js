@@ -7,6 +7,15 @@ import LoginInformations from './components/loginInformations'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
+  /*async function API() {
+    const api = 'http://192.168.2.199:5000/'
+
+    await fetch(api)
+    console.log(api)
+  }
+
+  API()*/
+
   return (
     <>
       <Head>

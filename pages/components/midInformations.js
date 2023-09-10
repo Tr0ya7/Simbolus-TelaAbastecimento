@@ -1,12 +1,13 @@
 import PropInput from './propInput'
 import styles from '@/styles/components/midInformations.module.scss'
+import { useState } from 'react'
 
 export default function MidInformations() {
     return (
         <div className={styles.midInformations}>
             <div>
-                <p>
-                    Kilometragem
+                <p className="measure">
+                    Quilometragem
                 </p>
                 <PropInput />
             </div>

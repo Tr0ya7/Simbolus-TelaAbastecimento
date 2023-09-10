@@ -12,9 +12,11 @@ export default function Informations() {
             <MidInformations />
             <StaticInformations />
             <Obs />
-            <PropButton>
-                Salvar
-            </PropButton>
+            <div className={styles.button}>
+                <PropButton>
+                    Salvar
+                </PropButton>
+            </div>
         </form>
     )
 }
