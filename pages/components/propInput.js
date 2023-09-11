@@ -12,7 +12,7 @@ export default function PropInput(props) {
                 type={ props.type } 
                 maxLength={ props.maxLength } 
                 disabled={ props.disabled } 
-                onChange={ inputOnChange } 
+                onChange={ inputOnChange }
                 required="true"
             />
 }

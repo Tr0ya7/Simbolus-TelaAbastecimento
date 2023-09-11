@@ -14,18 +14,9 @@
         input {
             margin-left: $margin;
         }
-    
-        img {
-            position: absolute;
-            margin: -1.60em 0 0 9.25em;
-            border-left: 1px solid grey;
-            padding: 4.5px;
-        }
-    
-        .arrow {
-            margin-top: -1.5em;
-            border: none;
-            transition: .3s;
+        
+        select {
+            margin-left: $margin;
         }
     }
 }

@@ -1,152 +1,44 @@
-// enxutar as functions
-
-import PropArrow from './propArrow'
-import Prop_DropMenu from './prop_dropMenu'
 import PropInput from './propInput'
 import styles from '@/styles/components/topInformations.module.scss'
+import SelectInput from './SelectInput'
+import { useState } from 'react'
 import LoginInformations from './loginInformations'
-import { measure } from './midInformations'
 
-export default function TopInformations() {
-    function typeArrowOnClick() {
-        const typeArrow = document.querySelector('#typeArrow')
-    
-        if (typeArrow) {
-            const types = document.querySelector('#types_dropMenu')
-            var rotate = typeArrow.style.rotate
-    
-            typeArrow.addEventListener('click', () => {
-                if (rotate === 'unset') {
-                    typeArrow.style.rotate = '180deg'
-                    types.style.display = 'block'
-                } else {
-                    typeArrow.style.rotate = 'unset'
-                    types.style.display = 'none'
-                }
-            })
-        }
-    }
-    
-    function localArrowOnClick() {
-        const localArrow = document.querySelector('#localArrow')
-    
-        if (localArrow) {
-            const local = document.querySelector('#local_dropMenu')
-            var rotate = localArrow.style.rotate
-    
-            localArrow.addEventListener('click', () => {
-                if (rotate === 'unset') {
-                    localArrow.style.rotate = '180deg'
-                    local.style.display = 'block'
-                } else {
-                    localArrow.style.rotate = 'unset'
-                    local.style.display = 'none'
-                }
-            })
-        }
-    }
-    
-    function suplyTypeArrowOnClick() {
-        const suplyTypeArrow = document.querySelector('#suplyTypeArrow')
-    
-        if (suplyTypeArrow) {
-            const suplyType = document.querySelector('#suplyType_dropMenu')
-            var rotate = suplyTypeArrow.style.rotate
-    
-            suplyTypeArrow.addEventListener('click', () => {
-                if (rotate === 'unset') {
-                    suplyTypeArrow.style.rotate = '180deg'
-                    suplyType.style.display = 'block'
-                } else {
-                    suplyTypeArrow.style.rotate = 'unset'
-                    suplyType.style.display = 'none'
-                }
-            })
-        }
-    }
-    
-    function fuelArrowOnClick() {
-        const fuelArrow = document.querySelector('#fuelArrow')
-    
-        if (fuelArrow) {
-            const fuel = document.querySelector('#fuel_dropMenu')
-            var rotate = fuelArrow.style.rotate
-    
-            fuelArrow.addEventListener('click', () => {
-                if (rotate === 'unset') {
-                    fuelArrow.style.rotate = '180deg'
-                    fuel.style.display = 'block'
-                } else {
-                    fuelArrow.style.rotate = 'unset'
-                    fuel.style.display = 'none'
-                }
-            })
-        }
-    }
+export default function TopInformations(props) {
+    const [data, setData] = useState('')
+    const [employer, setEmployer] = useState('')
+    const [hour, setHour] = useState('')
 
-    function typeFirstValueOnClick() {
-        const input = document.querySelector('#typeInput')
-        var suply = document.querySelector('.suply')
-        const firstValue = document.querySelector('.type_firstOption')
-        //var measure = document.querySelector('.measure') //fazer funcionar
+    const types = [
+        'Veículo',
+        'Gerador'
+    ]
 
-        input.value = firstValue.textContent
-        suply.innerHTML = "Veículo"
-        //measure.innerHTML = "Quilometragem" //fazer funcionar
-    }
+    const [type, setType] = useState('')
 
-    function typeSecondValueOnClick() {
-        const input = document.querySelector('#typeInput')
-        var suply = document.querySelector('.suply')
-        const secondValue = document.querySelector('.type_secondOption')
-        //var measure = document.querySelector('.measure') //fazer funcionar
+    const locations = [
+        'Local',
+        'Terceiro'
+    ]
 
-        input.value = secondValue.textContent
-        suply.innerHTML = "Gerador"
-        //measure.innerHTML = "Horimetro" //fazer funcionar
-    }
+    const [local, setLocal] = useState('')
 
-    function localFirstValueOnClick() {
-        const input = document.querySelector('#localInput')
-        const firstValue = document.querySelector('.local_firstOption')
+    const suplys = []
 
-        input.value = firstValue.textContent
-    }
+    const [suply, setSuply] = useState('')
 
-    function localSecondValueOnClick() {
-        const input = document.querySelector('#localInput')
-        const secondValue = document.querySelector('.local_secondOption')
+    const fuel = [
+    ]
 
-        input.value = secondValue.textContent
-    }
+    const [gas, setGas] = useState('')
 
-    function suplyTypeFirstValueOnClick() {
-        const input = document.querySelector('#suplyTypeInput')
-        const firstValue = document.querySelector('.suplyType_firstOption')
-
-        input.value = firstValue.textContent
-    }
-    
-    function suplyTypeSecondValueOnClick() {
-        const input = document.querySelector('#suplyTypeInput')
-        const secondValue = document.querySelector('.suplyType_secondOption')
-        
-        input.value = secondValue.textContent
-    }
-
-    function fuelFirstValueOnClick() {
-        const input = document.querySelector('#fuelInput')
-        const firstValue = document.querySelector('.fuel_firstOption')
-    
-        input.value = firstValue.textContent
-    }
-    
-    function fuelSecondValueOnClick() {
-        const input = document.querySelector('#fuelInput')
-        const secondValue = document.querySelector('.fuel_secondOption')
-    
-        input.value = secondValue.textContent
-    }
+    /*props.data = data
+    props.employer = employer
+    props.hour = hour
+    props.type = type
+    props.local = local
+    props.suply = suply
+    props.gas = gas*/
 
     return (
         <div className={styles.topInformations}>
@@ -154,83 +46,53 @@ export default function TopInformations() {
                 <p>
                     Funcionário Responsável
                 </p>
-                <PropInput id="employersInput" disabled="disabled" value={ LoginInformations.cnpj } />
+                <PropInput 
+                    id="employersInput" 
+                    value={ employer } 
+                    disabled="disabled" 
+                    change={ value => setEmployer(value) }
+                />
             </div>
             <div className={styles.main}>
                 <p>
                     Data
                 </p>
-                <PropInput className="dataInput" maxLength="8" />
+                <PropInput 
+                    className="dataInput" 
+                    value={ data } 
+                    maxLength="8" 
+                    change={ value => setData(value) }
+                />
             </div>
             <div className={styles.main}>
                 <p>
                     Hora
                 </p>
-                <PropInput />
+                <PropInput value={ hour } change={ value => setHour(value) } />
             </div>
             <div className={styles.main}>
                 <p>
                     Tipo
                 </p>
-                <PropInput id="typeInput" value="Veículo" disabled="disabled" />
-                <PropArrow className={styles.arrow} id="typeArrow" onClick={ typeArrowOnClick } />
-                <Prop_DropMenu 
-                    id="types_dropMenu" 
-                    classNameFirstOption="type_firstOption"
-                    firstOptionOnClick={ typeFirstValueOnClick }
-                    text="Veículo"
-                    classNameSecondOption="type_secondOption" 
-                    secondOptionOnClick={ typeSecondValueOnClick }
-                    text1="Gerador"
-                />
+                <SelectInput itens={types} value={type} change={value => setType(value)} />
             </div>
             <div className={styles.main}>
                 <p>
                     Local
                 </p>
-                <PropInput id="localInput" disabled="disabled" />
-                <PropArrow className={styles.arrow} id="localArrow" onClick={ localArrowOnClick } />
-                <Prop_DropMenu 
-                    id="local_dropMenu" 
-                    classNameFirstOption="local_firstOption"
-                    firstOptionOnClick={ localFirstValueOnClick }
-                    text="Local"
-                    classNameSecondOption="local_secondOption"
-                    secondOptionOnClick={ localSecondValueOnClick }
-                    text1="Terceiros"
-                />
+                <SelectInput itens={locations} value={local} change={value => setLocal(value)} />
             </div>
             <div className={styles.main}>
                 <p className="suply">
                     Veículo
                 </p>
-                <PropInput id="suplyTypeInput" disabled="disabled" />
-                <PropArrow className={styles.arrow} id="suplyTypeArrow" onClick={ suplyTypeArrowOnClick } />
-                <Prop_DropMenu 
-                    id="suplyType_dropMenu"
-                    classNameFirstOption="suplyType_firstOption"
-                    firstOptionOnClick={ suplyTypeFirstValueOnClick }
-                    text="..." 
-                    classNameSecondOption="suplyType_secondOption"
-                    secondOptionOnClick={ suplyTypeSecondValueOnClick }
-                    text1="..." 
-                />
+                <SelectInput itens={suplys} value={suply} change={value => setSuply(value)} />
             </div>
             <div className={styles.main}>
                 <p>
                     Combustível
                 </p>
-                <PropInput id="fuelInput" disabled="disabled" />
-                <PropArrow className={styles.arrow} id="fuelArrow" onClick={ fuelArrowOnClick } />
-                <Prop_DropMenu
-                    id="fuel_dropMenu"
-                    classNameFirstOption="fuel_firstOption"
-                    firstOptionOnClick={ fuelFirstValueOnClick }
-                    text="..."
-                    classNameSecondOption="fuel_secondOption"
-                    secondOptionOnClick={ fuelSecondValueOnClick }
-                    text1="..."
-                />
+                <SelectInput itens={fuel} value={gas} change={value => setGas(value)} />
             </div>
         </div>
     )
