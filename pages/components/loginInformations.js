@@ -2,15 +2,19 @@ import styles from '@/styles/components/loginInformations.module.scss'
 import PropInput from './propInput'
 import PropButton from './propButton'
 import { useState } from 'react'
+import { useSelector } from 'react-redux'
 
-export default function LoginInformations() {
+export default function() {
     const [cpf, setCpf] = useState('')
     const [pass, setPass] = useState('')
+
+    var currentUser = useSelector((rootReducer) => rootReducer.userReducer)
+    console.log({ currentUser })
 
     async function formOnSubmit(event) {
         var api = `http://192.168.2.199:5000/login/${cpf}/${pass}`
         event.preventDefault()
-        
+
         await fetch(api)
         .then((res) => res.json())
         .then((data) => {
@@ -32,7 +36,12 @@ export default function LoginInformations() {
                 <p>
                     Senha
                 </p>
-                <PropInput className="pass" type="password" value={ pass } change={ value => setPass(value) } />
+                <PropInput
+                    className="pass"
+                    type="password"
+                    value={ pass }
+                    change={ value => setPass(value) }
+                />
             </div>
             <PropButton>
                 Entrar
