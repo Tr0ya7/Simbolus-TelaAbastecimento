@@ -1,19 +1,25 @@
 import styles from '@/styles/components/loginInformations.module.scss'
-import PropInput from './propInput'
 import PropButton from './propButton'
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { useForm } from 'react-hook-form'
+import { saveData } from '../store/reducers/employer'
 
 export default function() {
-    const [cpf, setCpf] = useState('')
-    const [pass, setPass] = useState('')
+    const dispatch = useDispatch()
 
-    var currentUser = useSelector((rootReducer) => rootReducer.userReducer)
-    console.log({ currentUser })
+    const employer = useSelector(state => state.employer)
+    const { register, handleSubmit } = useForm({
+        defaultValues: {
+            currentCpf: '',
+            currentPass: ''
+        }
+    })
 
-    async function formOnSubmit(event) {
-        var api = `http://192.168.2.199:5000/login/${cpf}/${pass}`
+    async function login(data, event) {
         event.preventDefault()
+        dispatch(saveData({ currentCpf: data.currentCpf }))
+        
+        var api = `http://192.168.2.199:5000/login/${data.currentCpf}/${data.currentPass}`
 
         await fetch(api)
         .then((res) => res.json())
@@ -27,20 +33,22 @@ export default function() {
     }
 
     return (
-        <form className={styles.loginInformations} onSubmit={ formOnSubmit }>
+        <form className={styles.loginInformations} onSubmit={ handleSubmit(login) }>
             <div>
                 <p>
                     CPF
                 </p>
-                <PropInput value={ cpf } maxLength="11" change={ value => setCpf(value) } />
+                <input
+                    {...register('currentCpf', { required: true, valueAsNumber: true })}
+                    maxLength="11"
+                />
                 <p>
                     Senha
                 </p>
-                <PropInput
+                <input
+                    {...register('currentPass')} 
                     className="pass"
                     type="password"
-                    value={ pass }
-                    change={ value => setPass(value) }
                 />
             </div>
             <PropButton>

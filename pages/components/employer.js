@@ -1,12 +1,15 @@
+import { useSelector } from 'react-redux';
 import PropInput from './propInput'
 
-export default function (props) {
+export default function Employer (props) {
+    const employer = useSelector(state => state.employer.currentCpf);
+    
     return (
         <>
             <p>
                 { props.children }
             </p>
-            <PropInput id="employersInput" disabled="disabled" />
+            <input id="employersInput" value={ employer } disabled="disabled" />
         </>
     )
 }
