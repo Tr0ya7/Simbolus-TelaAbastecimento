@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-const initialState = ''
+const initialState = {
+    currentCpf: ''
+}
 
 const EmployerSlice = createSlice({
     name: 'employer',
     initialState,
-    currentCpf: '',
-    currentPass: '',
     reducers: {
         saveData: (state, { payload }) => {
-            return { ...state, ...payload }
+            return state.currentCpf = payload
         }
     }
 })

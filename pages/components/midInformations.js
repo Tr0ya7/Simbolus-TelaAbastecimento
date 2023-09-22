@@ -1,31 +1,38 @@
-import PropInput from './propInput'
 import styles from '@/styles/components/midInformations.module.scss'
 import { useState } from 'react'
 
-export default function MidInformations() {
+export default function MidInformations(props) {
     const [measure, setMeasure] = useState('')
     const [quantity, setQuantity] = useState('')
     const [cost, setCost] = useState('')
+
+    function midInformationsOnChange() {
+        props.midInfo({
+            measure,
+            quantity,
+            cost
+        })
+    }
     
     return (
-        <div className={styles.midInformations}>
+        <div className={styles.midInformations} onChange={ midInformationsOnChange }>
             <div>
                 <p>
                     Quilometragem
                 </p>
-                <PropInput value={ measure } change={ value => setMeasure(value) } />
+                <input value={ measure } onChange={ event => setMeasure(event.target.value) } />
             </div>
             <div>
                 <p>
                     Litros
                 </p>
-                <PropInput value={ quantity } change={ value => setQuantity(value) } />
+                <input value={ quantity } onChange={ event => setQuantity(event.target.value) } />
             </div>
             <div className={styles.expense}>
                 <p>
                     Custo/Litro
                 </p>
-                <PropInput value={ cost } change={ value => setCost(value) } />
+                <input value={ cost } onChange={ event => setCost(event.target.value) } />
             </div>
         </div>
     )

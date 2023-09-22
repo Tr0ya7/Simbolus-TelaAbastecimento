@@ -3,23 +3,20 @@ import PropButton from './propButton'
 import { useDispatch, useSelector } from 'react-redux'
 import { useForm } from 'react-hook-form'
 import { saveData } from '../store/reducers/employer'
+import { useState } from 'react'
 
 export default function() {
     const dispatch = useDispatch()
-
+    const [pass, setPass] = useState('')
     const employer = useSelector(state => state.employer)
     const { register, handleSubmit } = useForm({
-        defaultValues: {
-            currentCpf: '',
-            currentPass: ''
-        }
+        currentCpf: 0
     })
 
-    async function login(data, event) {
-        event.preventDefault()
+    async function login(data) {
         dispatch(saveData({ currentCpf: data.currentCpf }))
         
-        var api = `http://192.168.2.199:5000/login/${data.currentCpf}/${data.currentPass}`
+        var api = `http://192.168.2.199:5000/login/${data.currentCpf}/${pass}`
 
         await fetch(api)
         .then((res) => res.json())
@@ -39,7 +36,7 @@ export default function() {
                     CPF
                 </p>
                 <input
-                    {...register('currentCpf', { required: true, valueAsNumber: true })}
+                    {...register('currentCpf', { required: true })}
                     maxLength="11"
                 />
                 <p>
@@ -48,7 +45,9 @@ export default function() {
                 <input
                     {...register('currentPass')} 
                     className="pass"
+                    value={ pass }
                     type="password"
+                    onChange={ event => setPass(event.target.value) }
                 />
             </div>
             <PropButton>

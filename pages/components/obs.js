@@ -1,20 +1,22 @@
 import styles from '@/styles/components/obs.module.scss'
 import { useState } from 'react'
 
-export default function Obs() {
+export default function Obs(props) {
     const [obs, setObs] = useState('')
 
-    function obsOnChange(event) {
-        setObs(event.target.value)
+    function obsOnChange() {
+        props.obsInfo({
+            obs
+        })
     }
 
     return (
-        <div className={styles.obs}>
+        <div className={styles.obs} onChange={ obsOnChange }>
             <div>
                 <p>
                     Observação
                 </p>
-                <textarea type="text" value={ obs } onChange={ obsOnChange } />
+                <textarea type="text" value={ obs } onChange={ event => setObs(event.target.value) } />
             </div>
         </div>
     )
