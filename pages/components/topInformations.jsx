@@ -5,46 +5,40 @@ import Data from './data'
 import Hour from './hour'
 import Type from './type'
 import Local from './local'
-import Veicles from './veicles'
-import Fuel from './fuel'
 import { UserContext } from './common'
+import Vehicles from './vehicles'
+import Fuel from './fuel'
 
 export default function TopInformations(props) {
-    const {cpf, setCpf} = useContext(UserContext)
+    const { cpf, setCpf, type, setType } = useContext(UserContext)
     const [data, setData] = useState('')
     const [hour, setHour] = useState('')
+    var vehicleText = 'Veículos'
     const types = [
         'Veículo',
         'Gerador'
-
     ]
-    const [type, setType] = useState(types)
     const locations = [
         'Local',
         'Terceiro'
     ]
     const [local, setLocal] = useState(locations)
-    const [suply, setSuply] = useState([])
-    const [, setSuplyLoaded] = useState(false)
-    const [fuel, setFuel] = useState([])
-    const [, setFuelLoaded] = useState(false)
+    const suplys = []
+    const [suply, setSuply] = useState(suplys)
+    const gas = []
+    const [fuel, setFuel] = useState(gas)
+    [type, setType] = useState(types)
     const path = 'http://192.168.2.199:5000'
 
     fetch(`${path}/veiculos`)
         .then((res) => res.json())
-        .then((data) => {
-            data.veiculos.map((veiculo) => suply.push(veiculo))
-            setSuplyLoaded(true)
-        })
-
+        .then((data) => suplys.push(...data.veiculos.map((vehicle) => vehicle.descricao)))
+    
     fetch(`${path}/combustiveis`)
         .then((res) => res.json())
-        .then((data) => {
-            data.produtos.map((gas) => fuel.push(gas.descricao))
-            setFuelLoaded(true)
-        })
+        .then((data) => suplys.push(...data.produtos.map((fuel) => fuel.descricao)))
 
-        console.log(suply)
+    console.log(suplys)
 
     function topInformationsOnChange() {
         props.topInfo([
@@ -70,9 +64,9 @@ export default function TopInformations(props) {
                 Hora
             </Hour>
             <Type
-                className={styles.main} 
-                itens={types} 
-                value={type} 
+                className={styles.main}
+                itens={types}
+                value={type}
                 onChange={(event) => setType(event.target.value)}
             >
                 Tipo
@@ -85,18 +79,18 @@ export default function TopInformations(props) {
             >
                 Local
             </Local>
-            Veiculos
-            <select
+            <Vehicles
                 className={styles.main}
+                itens={suplys}
                 value={suply}
                 onChange={(event) => setSuply(event.target.value)}
             >
-                {suply.map(item => (<option key={item.codigo}>{item.descricao}</option>))}
-            </select>
-            <Fuel 
-                className={styles.main} 
-                itens={fuel} 
-                value={fuel} 
+                {vehicleText = type === 'Gerador' ? 'Geradores' : 'Veículos'}
+            </Vehicles>
+            <Fuel
+                className={styles.main}
+                itens={gas}
+                value={fuel}
                 onClick={(event) => setFuel(event.target.value)}
             >
                 Combustível

@@ -7,15 +7,6 @@ import LoginInformations from './components/loginInformations'
 const inter = Inter({ subsets: ['latin'] })
 
 export default function Home() {
-  /*function API() {
-    const url = 'http://192.168.2.199:5000/veiculos'
-    fetch(url)
-    .then((res) => res.json())
-    .then((data) => console.log(data))
-  }*/
-
-  //API()
-  
   return (
     <>
       <Head>

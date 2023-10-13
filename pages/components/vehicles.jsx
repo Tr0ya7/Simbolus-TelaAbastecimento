@@ -1,6 +1,6 @@
-import ApiSelectInput from './apiSelectInput'
+import ApiSelectInput from "./apiSelectInput";
 
-export default function Fuel(props) {
+export default function Vehicles(props) {
     return (
         <div className={ props.className }>
             <p>
