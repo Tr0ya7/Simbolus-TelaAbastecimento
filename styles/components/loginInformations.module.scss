@@ -6,11 +6,20 @@
 
     button {
         margin: 1.5em 0;
+        
+        &:active {
+            background-color: $background-color;
+        }
 
         @media (max-width: 550px) {
             button {
                 padding: 2.5%;
             }
         }
+    }
+
+    .disabledButton {
+        background-color: lightgrey !important;
+        cursor: default !important;
     }
 }

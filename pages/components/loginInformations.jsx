@@ -3,11 +3,12 @@ import PropButton from './propButton'
 import { useContext, useState } from 'react'
 import { UserContext } from './common'
 import Input from './input'
-import Link from 'next/link'
+import { useRouter } from 'next/router'
 
 export default function LoginInformations() {
     const [pass, setPass] = useState('')
     const {cpf, setCpf} = useContext(UserContext)
+    const router = useRouter();
 
     async function login(event) {
         event.preventDefault()
@@ -15,15 +16,15 @@ export default function LoginInformations() {
 
         var api = `http://192.168.2.199:5000/login/${cpf}/${pass}`
 
-        /*await fetch(api)
+        await fetch(api)
             .then((res) => res.json())
             .then((data) => {
                 if (data.msg === 'OK') {
-                    window.location.href = "./abastecimento"
+                    router.push('./abastecimento')
                 } else {
                     alert('erro')
                 }
-            })*/
+            })
     }
 
     return (
@@ -35,7 +36,7 @@ export default function LoginInformations() {
                 <Input
                     value={cpf} 
                     onChange={(event) => setCpf(event.target.value)}
-                    type="number"
+                    
                 />
                 <p>
                     Senha
@@ -47,11 +48,11 @@ export default function LoginInformations() {
                     onChange={(event) => setPass(event.target.value)}
                 />
             </div>
-            <Link href="/abastecimento">
-                <PropButton>
-                    Entrar
-                </PropButton>
-            </Link>
+            <PropButton 
+                className={cpf.length < 11 || pass.length < 5 ? `${styles.disabledButton}`: ``}
+            >
+                Entrar
+            </PropButton>
         </form>
     )
 }

@@ -32,13 +32,11 @@ export default function TopInformations(props) {
 
     fetch(`${path}/veiculos`)
         .then((res) => res.json())
-        .then((data) => suplys.push(...data.veiculos.map((vehicle) => vehicle.descricao)))
+        .then((data) => suplys.push(...data.veiculos.map((vehicle) => vehicle)))
     
     fetch(`${path}/combustiveis`)
         .then((res) => res.json())
-        .then((data) => suplys.push(...data.produtos.map((fuel) => fuel.descricao)))
-
-    console.log(suplys)
+        .then((data) => gas.push(...data.produtos.map((fuel) => fuel)))
 
     function topInformationsOnChange() {
         props.topInfo([
