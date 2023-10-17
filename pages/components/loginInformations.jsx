@@ -35,8 +35,8 @@ export default function LoginInformations() {
                 </p>
                 <Input
                     value={cpf} 
-                    onChange={(event) => setCpf(event.target.value)}
-                    
+                    maxLength={11}
+                    onChange={(event) => setCpf(event.target.value)}  
                 />
                 <p>
                     Senha
@@ -49,7 +49,7 @@ export default function LoginInformations() {
                 />
             </div>
             <PropButton 
-                className={cpf.length < 11 || pass.length < 5 ? `${styles.disabledButton}`: ``}
+                className={cpf.length < 11 || pass.length < 5 ? `${styles.disabledButton}`: ``}   
             >
                 Entrar
             </PropButton>

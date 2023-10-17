@@ -1,5 +1,5 @@
 import styles from '@/styles/components/topInformations.module.scss'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Employer from './employer'
 import Data from './data'
 import Hour from './hour'
@@ -23,20 +23,69 @@ export default function TopInformations(props) {
         'Terceiro'
     ]
     const [local, setLocal] = useState(locations)
-    const suplys = []
-    const [suply, setSuply] = useState(suplys)
-    const gas = []
-    const [fuel, setFuel] = useState(gas)
+    const [suply, setSuply] = useState([])
+    const [currentSuply] = useState(suply)
+    const [suplyGenerators, setSuplyGenerators] = useState([])
+    const [currentSuplyGenerators] = useState(suplyGenerators)
+    const [fuel, setFuel] = useState([])
+    const [currentFuel] = useState(fuel)
     [type, setType] = useState(types)
     const path = 'http://192.168.2.199:5000'
 
-    fetch(`${path}/veiculos`)
-        .then((res) => res.json())
-        .then((data) => suplys.push(...data.veiculos.map((vehicle) => vehicle)))
+    async function fetchDataVehicles() {
+        try {
+            const responseVehicles = await fetch(`${path}/veiculos`)
+            const dataVehicles = await responseVehicles.json()
+
+            setSuply(
+                dataVehicles.veiculos.map((vehicle) => ({
+                    codigo: vehicle.codigo,
+                    descricao: vehicle.descricao
+                }))
+            )
     
-    fetch(`${path}/combustiveis`)
-        .then((res) => res.json())
-        .then((data) => gas.push(...data.produtos.map((fuel) => fuel)))
+            const responseFuel = await fetch(`${path}/combustiveis`)
+            const dataFuel = await responseFuel.json()
+
+            setFuel(
+                dataFuel.produtos.map((gas) => ({
+                    codigo: gas.codigo,
+                    descricao: gas.descricao
+                }))
+            )
+        } catch (error) {
+            console.error('Erro ao buscar dados da API: ', error)
+        }
+    }
+    
+    useEffect(() => {
+        fetchDataVehicles()
+    }, [])
+
+    async function fetchDataGenerators() {
+        try {
+            const responseGenerators = await fetch(`${path}/geradores`)
+            const dataGenerators = await responseGenerators.json()
+
+            setSuplyGenerators(
+                dataGenerators.geradores.map((generator) => ({
+                    codigo: generator.codigo,
+                    descricao: generator.descricao
+                }))
+            )
+        } catch (error) {
+            console.error('Erro ao buscar dados da API: ', error)
+        }
+    }
+    
+    useEffect(() => {
+        fetchDataGenerators()
+    }, [])
+
+    const suplyTypes = type === 'Gerador' ? suplyGenerators : suply
+    const setSuplyData = type === 'Gerador'
+        ? (event) => setSuplyGenerators(event.target.value) 
+        : (event) => setSuply(event.target.value)
 
     function topInformationsOnChange() {
         props.topInfo([
@@ -45,8 +94,9 @@ export default function TopInformations(props) {
             hour,
             type,
             local,
-            suply,
-            fuel
+            currentSuply,
+            currentSuplyGenerators,
+            currentFuel
         ])
     }
 
@@ -79,17 +129,17 @@ export default function TopInformations(props) {
             </Local>
             <Vehicles
                 className={styles.main}
-                itens={suplys}
-                value={suply}
-                onChange={(event) => setSuply(event.target.value)}
+                itens={suplyTypes}
+                value={suplyTypes}
+                onChange={setSuplyData} //{(event) => setSuply(event.target.value)}
             >
                 {vehicleText = type === 'Gerador' ? 'Geradores' : 'Veículos'}
             </Vehicles>
             <Fuel
                 className={styles.main}
-                itens={gas}
+                itens={fuel}
                 value={fuel}
-                onClick={(event) => setFuel(event.target.value)}
+                onChange={(event) => setFuel(event.target.value)}
             >
                 Combustível
             </Fuel>

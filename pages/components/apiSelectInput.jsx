@@ -1,13 +1,19 @@
 import styles from '@/styles/components/selectInput.module.scss'
 
 export default function ApiSelectInput(props) {
+    const itemsArray = Array.isArray(props.itens) ? props.itens : []
+
     return (
-        <select 
-            className={styles.select} 
-            value={ props.value } 
+        <select
+            className={styles.select}
+            value={ props.value }
             onChange={ props.onChange }
         >
-            { props.itens.map((item) => (<option key={item.codigo}>{item.descricao}</option>)) }
+            {itemsArray.map((item) => (
+                <option key={item.codigo} value={item.descricao}>
+                    {item.descricao}
+                </option>
+            ))}
         </select>
     )
 }
