@@ -5,24 +5,31 @@ export default function ApiSelectInput(props) {
     const [selectedValue, setSelectedValue] = useState('')
 
     function handleSelectChange(event) {
-        const newValue = event.target.value
-        setSelectedValue(newValue)
-        props.onChange(newValue)
+        const selectedOption = event.target.value
+        const item = props.itens.find(item => item.descricao === selectedOption)
+
+        if (item) {
+            const newValue = {
+                codigo: item.codigo,
+                descricao: item.descricao
+            }
+
+            setSelectedValue(newValue)
+            props.onChange(newValue)
+        }
     }
 
-    const itemsArray = Array.isArray(props.itens) ? props.itens : [];
+    const itemsArray = Array.isArray(props.itens) ? props.itens : []
 
     return (
-        <select className={styles.select} value={selectedValue} onChange={ handleSelectChange }>
+        <select className={styles.select} value={selectedValue.descricao} onChange={handleSelectChange}>
+            <option className={styles.defaultText} value="" hidden>
+                Selecione um valor
+            </option>
             {itemsArray.map((item) => (
-                <>
-                    <option className={styles.defaultText} value="" hidden>
-                        Selecione um valor
-                    </option>
-                    <option key={item.codigo} value={item.descricao}>
-                        {item.descricao}
-                    </option>
-                </>
+                <option key={item.codigo} value={item.descricao}>
+                    {item.descricao}
+                </option>
             ))}
         </select>
     )

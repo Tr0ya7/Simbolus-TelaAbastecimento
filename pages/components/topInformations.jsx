@@ -8,7 +8,7 @@ import TopInformationsSelectInput from './topInformationsSelectInput'
 import TopInformationsApiSelectInput from './topInformationsApiSelectInput'
 
 export default function TopInformations(props) {
-    const { id, setId, type, setType } = useContext(UserContext)
+    const {id, setId, type, setType} = useContext(UserContext)
     const [data, setData] = useState('')
     const [hour, setHour] = useState('')
     const types = [
@@ -20,7 +20,7 @@ export default function TopInformations(props) {
         'Terceiro'
     ]
     const [local, setLocal] = useState(locations)
-    const [suply, setSuply] = useState([])
+    const [suply, setSuply] = useState({})
     var [currentSuply, setCurrentSuply] = useState(suply)
     const [suplyGenerators, setSuplyGenerators] = useState([])
     var [currentSuplyGenerators, setCurrentSuplyGenerators] = useState(suplyGenerators)
@@ -53,10 +53,13 @@ export default function TopInformations(props) {
             console.error('Erro ao buscar dados da API: ', error)
         }
     }
+
+    const [fetchedData, setFetchedData] = useState(false);
     
-    useEffect(() => {
-        fetchDataVehicles()
-    }, [])
+    if (fetchedData === false) {
+        fetchDataVehicles();
+        setFetchedData(true)
+    }
 
     async function fetchDataGenerators() {
         try {
@@ -102,31 +105,23 @@ export default function TopInformations(props) {
 
     if (type === 'Gerador') {
         suplyTypes = suplyGenerators
-        currentSuply = ''
     } else if (type === 'Veículo') {
         suplyTypes = suply
-        currentSuplyGenerators = ''
     }
 
-    const setSuplyData = type === 'Gerador'? setCurrentSuplyGenerators : setCurrentSuply
-
-    //currentSuply = suply.map((item) => item.codigo)
-    //console.log(currentSuply)
+    //const setSuplyData = type === 'Gerador'? setCurrentSuplyGenerators : setCurrentSuply
 
     function topInformationsOnChange() {
         props.topInfo({
-            fun_codigo: id,  //ok
-            data: data, //ok
-            hora: hour, //ok
-            tipo: type, //ok
-            local: local, //ok
-            veículo: currentSuply, //bem_codigo
-            gerador: currentSuplyGenerators, //bem_codigo
-            pro_codigo: currentFuel //pro_codigo
+            fun_codigo: id,
+            data: data,
+            hora: hour,
+            tipo: type,
+            local: local,
+            bem_codigo: currentSuply.codigo,
+            pro_codigo: currentFuel.codigo
         })
     }
-
-    //console.log(suply.map((item) => item.codigo), currentSuply)
 
     return (
         <div className={styles.topInformations} onChange={ topInformationsOnChange }>
@@ -158,8 +153,8 @@ export default function TopInformations(props) {
             <TopInformationsApiSelectInput
                 className={styles.main}
                 itens={suplyTypes}
-                value={suply}
-                onChange={setSuplyData}
+                value={suplyTypes}
+                onChange={setCurrentSuply}
             >
                 { vehicleText }
             </TopInformationsApiSelectInput>
