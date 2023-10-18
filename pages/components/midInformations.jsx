@@ -7,17 +7,17 @@ import Quantity from './quantity'
 
 export default function MidInformations(props) {
     const [measure, setMeasure] = useState('')
-    const { type, setType } = useContext(UserContext)
+    const {type} = useContext(UserContext)
     const [quantity, setQuantity] = useState('')
     const [cost, setCost] = useState('')
     var measureText = 'Quilometragem'
 
     function midInformationsOnChange() {
-        props.midInfo([
-            measure,
-            quantity,
-            cost
-        ])
+        props.midInfo({
+            km_hora: measure, //ok
+            qtde: quantity, //ok
+            km_hora: cost //ok
+        })
     }
     
     return (
@@ -28,7 +28,7 @@ export default function MidInformations(props) {
             <Quantity value={quantity} onChange={(event) => setQuantity(event.target.value)}>
                 Litros
             </Quantity>
-            <Cost value={cost} onClick={(event) => setCost(event.target.value)}>
+            <Cost value={cost} onChange={(event) => setCost(event.target.value)}>
                 Litros/Custo
             </Cost>
         </div>

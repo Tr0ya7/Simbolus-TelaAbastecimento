@@ -6,21 +6,23 @@ import Input from './input'
 import { useRouter } from 'next/router'
 
 export default function LoginInformations() {
+    var [currentCpf, setCurrentCpf] = useState('')
     const [pass, setPass] = useState('')
-    const {cpf, setCpf} = useContext(UserContext)
-    const router = useRouter();
+    const {setId} = useContext(UserContext)
+    const router = useRouter()
 
     async function login(event) {
+        const path = 'http://192.168.2.199:5000'
+        var api = `${path}/login/${currentCpf}/${pass}`
+
         event.preventDefault()
-        console.log(cpf, pass)
-
-        var api = `http://192.168.2.199:5000/login/${cpf}/${pass}`
-
         await fetch(api)
             .then((res) => res.json())
             .then((data) => {
                 if (data.msg === 'OK') {
-                    router.push('./abastecimento')
+                    currentCpf = data.fun_codigo
+                    setId(currentCpf)
+                    router.push('/abastecimento')
                 } else {
                     alert('erro')
                 }
@@ -34,9 +36,9 @@ export default function LoginInformations() {
                     CPF
                 </p>
                 <Input
-                    value={cpf} 
+                    value={currentCpf} 
                     maxLength={11}
-                    onChange={(event) => setCpf(event.target.value)}  
+                    onChange={(event) => setCurrentCpf(event.target.value)}  
                 />
                 <p>
                     Senha
@@ -49,7 +51,7 @@ export default function LoginInformations() {
                 />
             </div>
             <PropButton 
-                className={cpf.length < 11 || pass.length < 5 ? `${styles.disabledButton}`: ``}   
+                className={currentCpf.length < 11 || pass.length < 5 ? `${styles.disabledButton}`: ``}   
             >
                 Entrar
             </PropButton>

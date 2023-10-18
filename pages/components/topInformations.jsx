@@ -3,17 +3,14 @@ import { useContext, useEffect, useState } from 'react'
 import Employer from './employer'
 import Data from './data'
 import Hour from './hour'
-import Type from './type'
-import Local from './local'
 import { UserContext } from './common'
-import Vehicles from './vehicles'
-import Fuel from './fuel'
+import TopInformationsSelectInput from './topInformationsSelectInput'
+import TopInformationsApiSelectInput from './topInformationsApiSelectInput'
 
 export default function TopInformations(props) {
-    const { cpf, setCpf, type, setType } = useContext(UserContext)
+    const { id, setId, type, setType } = useContext(UserContext)
     const [data, setData] = useState('')
     const [hour, setHour] = useState('')
-    var vehicleText = 'Veículos'
     const types = [
         'Veículo',
         'Gerador'
@@ -24,13 +21,22 @@ export default function TopInformations(props) {
     ]
     const [local, setLocal] = useState(locations)
     const [suply, setSuply] = useState([])
-    const [currentSuply] = useState(suply)
+    var [currentSuply, setCurrentSuply] = useState(suply)
     const [suplyGenerators, setSuplyGenerators] = useState([])
-    const [currentSuplyGenerators] = useState(suplyGenerators)
+    var [currentSuplyGenerators, setCurrentSuplyGenerators] = useState(suplyGenerators)
     const [fuel, setFuel] = useState([])
-    const [currentFuel] = useState(fuel)
+    const [currentFuel, setCurrentFuel] = useState(fuel)
     [type, setType] = useState(types)
     const path = 'http://192.168.2.199:5000'
+    var vehicleText = 'Veículos'
+
+    if (type === 'Veículo') {
+        vehicleText = 'Veículos'
+    } else if (type === 'Gerador') {
+        vehicleText = 'Geradores'
+    } else {
+        vehicleText = 'Selecione um tipo'
+    }
 
     async function fetchDataVehicles() {
         try {
@@ -41,16 +47,6 @@ export default function TopInformations(props) {
                 dataVehicles.veiculos.map((vehicle) => ({
                     codigo: vehicle.codigo,
                     descricao: vehicle.descricao
-                }))
-            )
-    
-            const responseFuel = await fetch(`${path}/combustiveis`)
-            const dataFuel = await responseFuel.json()
-
-            setFuel(
-                dataFuel.produtos.map((gas) => ({
-                    codigo: gas.codigo,
-                    descricao: gas.descricao
                 }))
             )
         } catch (error) {
@@ -82,27 +78,59 @@ export default function TopInformations(props) {
         fetchDataGenerators()
     }, [])
 
-    const suplyTypes = type === 'Gerador' ? suplyGenerators : suply
-    const setSuplyData = type === 'Gerador'
-        ? (event) => setSuplyGenerators(event.target.value) 
-        : (event) => setSuply(event.target.value)
+    async function fetchDataGas() {
+        try {
+            const responseFuel = await fetch(`${path}/combustiveis`)
+            const dataFuel = await responseFuel.json()
+
+            setFuel(
+                dataFuel.produtos.map((gas) => ({
+                    codigo: gas.codigo,
+                    descricao: gas.descricao
+                }))
+            )
+        } catch (error) {
+            console.error('Erro ao buscar dados da API: ', error)
+        }
+    }
+
+    useEffect(() => {
+        fetchDataGas()
+    }, [])
+
+    var suplyTypes = ''
+
+    if (type === 'Gerador') {
+        suplyTypes = suplyGenerators
+        currentSuply = ''
+    } else if (type === 'Veículo') {
+        suplyTypes = suply
+        currentSuplyGenerators = ''
+    }
+
+    const setSuplyData = type === 'Gerador'? setCurrentSuplyGenerators : setCurrentSuply
+
+    //currentSuply = suply.map((item) => item.codigo)
+    //console.log(currentSuply)
 
     function topInformationsOnChange() {
-        props.topInfo([
-            cpf,
-            data,
-            hour,
-            type,
-            local,
-            currentSuply,
-            currentSuplyGenerators,
-            currentFuel
-        ])
+        props.topInfo({
+            fun_codigo: id,  //ok
+            data: data, //ok
+            hora: hour, //ok
+            tipo: type, //ok
+            local: local, //ok
+            veículo: currentSuply, //bem_codigo
+            gerador: currentSuplyGenerators, //bem_codigo
+            pro_codigo: currentFuel //pro_codigo
+        })
     }
+
+    //console.log(suply.map((item) => item.codigo), currentSuply)
 
     return (
         <div className={styles.topInformations} onChange={ topInformationsOnChange }>
-            <Employer className={styles.main} value={cpf} onChange={(event) => setCpf(event.target.value)}>
+            <Employer className={styles.main} value={id} onChange={(event) => setId(event.target.value)}>
                 Funcionários
             </Employer>
             <Data className={styles.main} value={data} onChange={(event) => setData(event.target.value)}>
@@ -111,38 +139,38 @@ export default function TopInformations(props) {
             <Hour className={styles.main} value={hour} onChange={(event) => setHour(event.target.value)}>
                 Hora
             </Hour>
-            <Type
+            <TopInformationsSelectInput
                 className={styles.main}
                 itens={types}
                 value={type}
                 onChange={(event) => setType(event.target.value)}
             >
                 Tipo
-            </Type>
-            <Local 
+            </TopInformationsSelectInput>
+            <TopInformationsSelectInput 
                 className={styles.main} 
                 itens={locations} 
                 value={local} 
                 onChange={(event) => setLocal(event.target.value)}
             >
                 Local
-            </Local>
-            <Vehicles
+            </TopInformationsSelectInput>
+            <TopInformationsApiSelectInput
                 className={styles.main}
                 itens={suplyTypes}
-                value={suplyTypes}
-                onChange={setSuplyData} //{(event) => setSuply(event.target.value)}
+                value={suply}
+                onChange={setSuplyData}
             >
-                {vehicleText = type === 'Gerador' ? 'Geradores' : 'Veículos'}
-            </Vehicles>
-            <Fuel
+                { vehicleText }
+            </TopInformationsApiSelectInput>
+            <TopInformationsApiSelectInput
                 className={styles.main}
                 itens={fuel}
                 value={fuel}
-                onChange={(event) => setFuel(event.target.value)}
+                onChange={setCurrentFuel}
             >
                 Combustível
-            </Fuel>
+            </TopInformationsApiSelectInput>
         </div>
     )
 }

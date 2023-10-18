@@ -5,7 +5,9 @@ export default function Obs(props) {
     const [obs, setObs] = useState('')
 
     function obsOnChange() {
-        props.obsInfo(obs)
+        props.obsInfo({
+            obs: obs
+        })
     }
 
     return (

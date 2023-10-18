@@ -6,7 +6,7 @@ export default function Cost(props) {
             <p>
                 {props.children}
             </p>
-            <PropInputMask mask="R$ 99,99" value={ props.value } onChange={ props.onChange } />
+            <PropInputMask mask="99,99" value={ props.value } onChange={ props.onChange } />
         </div>
     )
 }

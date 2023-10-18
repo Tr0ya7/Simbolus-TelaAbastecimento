@@ -6,18 +6,18 @@ import Obs from './obs'
 import PropButton from './propButton'
 
 export default function Informations() {
-    function informationsOnClick(data) {
+    function formOnSubmit(data) {
         console.log(data)
     }
 
     return (
-        <form className={styles.informations}>
-            <TopInformations topInfo={ informationsOnClick } />
-            <MidInformations midInfo={ informationsOnClick } />
+        <form className={styles.informations} onSubmit={ formOnSubmit }>
+            <TopInformations topInfo={ formOnSubmit } />
+            <MidInformations midInfo={ formOnSubmit } />
             <StaticInformations />
-            <Obs obsInfo={ informationsOnClick } />
+            <Obs obsInfo={ formOnSubmit } />
             <div className={styles.button}>
-                <PropButton onClick={ informationsOnClick }>
+                <PropButton>
                     Salvar
                 </PropButton>
             </div>
