@@ -14,9 +14,9 @@ export default function MidInformations(props) {
 
     function midInformationsOnChange() {
         props.midInfo({
-            km_hora: measure, //ok
-            qtde: quantity, //ok
-            km_hora: cost //ok
+            km_hora: measure,
+            qtde: quantity,
+            //km_hora: cost
         })
     }
     

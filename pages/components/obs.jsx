@@ -16,7 +16,7 @@ export default function Obs(props) {
                 <p>
                     Observação
                 </p>
-                <textarea type="text" value={ obs } onChange={ event => setObs(event.target.value) } />
+                <textarea type="text" value={obs} onChange={event => setObs(event.target.value)} />
             </div>
         </div>
     )

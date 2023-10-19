@@ -7,10 +7,10 @@ export default function SelectInput(props) {
             value={ props.value } 
             onChange={ props.onChange }
         >
-            <option className={styles.defaultText} value="" hidden>
+            <option className={styles.defaultText} key='Selecione um valor' value="" hidden>
                 Selecione um valor
             </option>
-           { props.itens.map((item) => (<option key={item.codigo}>{item}</option>)) }
+            { props.itens.map((item) => (<option key={item.codigo}>{item}</option>)) }
         </select>
     )
 }

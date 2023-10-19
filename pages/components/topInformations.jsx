@@ -23,7 +23,6 @@ export default function TopInformations(props) {
     const [suply, setSuply] = useState({})
     var [currentSuply, setCurrentSuply] = useState(suply)
     const [suplyGenerators, setSuplyGenerators] = useState([])
-    var [currentSuplyGenerators, setCurrentSuplyGenerators] = useState(suplyGenerators)
     const [fuel, setFuel] = useState([])
     const [currentFuel, setCurrentFuel] = useState(fuel)
     [type, setType] = useState(types)
@@ -108,8 +107,6 @@ export default function TopInformations(props) {
     } else if (type === 'Veículo') {
         suplyTypes = suply
     }
-
-    //const setSuplyData = type === 'Gerador'? setCurrentSuplyGenerators : setCurrentSuply
 
     function topInformationsOnChange() {
         props.topInfo({
