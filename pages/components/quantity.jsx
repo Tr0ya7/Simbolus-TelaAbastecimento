@@ -6,7 +6,7 @@ export default function Quantity(props) {
             <p>
                 { props.children }
             </p>
-            <Input value={ props.quantity } onChange={ props.onChange } />
+            <Input value={ props.quantity } onChange={ props.onChange } type="number" />
         </div>
     )
 }

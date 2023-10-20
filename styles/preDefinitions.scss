@@ -3,14 +3,8 @@ $margin: 3%;
 $font-weight: bold;
 $background-color: rgb(27, 112, 143) !important;
 
-@mixin display3() {
+@mixin displayMargin() {
     display: $display;
     margin: $margin;
     flex-wrap: wrap;
-}
-
-@mixin border10px() {
-    border: 1px solid #ccc;
-    padding: 10px;
-    text-align: center;
 }

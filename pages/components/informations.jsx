@@ -43,16 +43,16 @@ export default function Informations() {
     }
 
     return (
-        <form className={styles.informations} onSubmit={formOnSubmit}>
-            <TopInformations topInfo={updateFormData} />
-            <MidInformations midInfo={updateFormData1} />
+        <form className={styles.informations} onSubmit={ formOnSubmit }>
+            <TopInformations topInfo={ updateFormData } />
+            <MidInformations midInfo={ updateFormData1 } />
             <StaticInformations />
-            <Obs obsInfo={updateFormData2} />
+            <Obs obsInfo={ updateFormData2 } />
             <div className={styles.button}>
                 <PropButton type="submit">
                     Salvar
                 </PropButton>
             </div>
         </form>
-    );
+    )
 }

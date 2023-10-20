@@ -8,7 +8,7 @@ import TopInformationsSelectInput from './topInformationsSelectInput'
 import TopInformationsApiSelectInput from './topInformationsApiSelectInput'
 
 export default function TopInformations(props) {
-    const {id, setId, type, setType} = useContext(UserContext)
+    const {path, id, setId, type, setType} = useContext(UserContext)
     const [data, setData] = useState('')
     const [hour, setHour] = useState('')
     const types = [
@@ -20,19 +20,29 @@ export default function TopInformations(props) {
         'Terceiro'
     ]
     const [local, setLocal] = useState(locations)
+    var currentLocal = ''
     const [suply, setSuply] = useState({})
     var [currentSuply, setCurrentSuply] = useState(suply)
     const [suplyGenerators, setSuplyGenerators] = useState([])
     const [fuel, setFuel] = useState([])
     const [currentFuel, setCurrentFuel] = useState(fuel)
     [type, setType] = useState(types)
-    const path = 'http://192.168.2.199:5000'
+    var currentType = ''
+
+    if (local === locations[0]) {
+        currentLocal = 0
+    } else if (local === locations[1]) {
+        currentLocal = 1
+    }
+
     var vehicleText = 'Veículos'
 
     if (type === 'Veículo') {
         vehicleText = 'Veículos'
+        currentType = 0
     } else if (type === 'Gerador') {
         vehicleText = 'Geradores'
+        currentType = 1
     } else {
         vehicleText = 'Selecione um tipo'
     }
@@ -113,8 +123,8 @@ export default function TopInformations(props) {
             fun_codigo: id,
             data: data,
             hora: hour,
-            tipo: type,
-            local: local,
+            tipo: currentType,
+            local: currentLocal,
             bem_codigo: currentSuply.codigo,
             pro_codigo: currentFuel.codigo
         })

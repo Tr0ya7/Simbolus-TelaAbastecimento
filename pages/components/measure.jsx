@@ -1,4 +1,5 @@
 import Input from './input'
+import PropInputMask from './propInputMask'
 
 export default function Measure(props) {
     return (

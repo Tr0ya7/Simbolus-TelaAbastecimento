@@ -2,7 +2,7 @@
 
 .main {
     div {
-        @include display3;
+        @include displayMargin;
         flex-wrap: nowrap;
         font-weight: $font-weight;
         justify-content: space-between;

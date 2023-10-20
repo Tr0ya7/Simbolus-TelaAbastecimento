@@ -1,4 +1,4 @@
-import styles from '@/styles/components/inputMask.module.scss'
+import styles from '@/styles/components/input.module.scss'
 import { InputMask } from 'primereact/inputmask'
 
 export default function PropInputMask(props) {
@@ -11,5 +11,6 @@ export default function PropInputMask(props) {
             maxLength={ props.maxLength } 
             disabled={ props.disabled }
             onChange={ props.onChange }
+            required
            />
 }

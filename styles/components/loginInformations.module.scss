@@ -1,20 +1,20 @@
 @import '../preDefinitions.scss';
 
 .loginInformations {
-    text-align: center;
-    overflow-y: hidden;
+    display: $display;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 10px;
+    padding: 40px;
 
     button {
         margin: 1.5em 0;
-        
-        &:active {
-            background-color: $background-color;
-        }
+        width: 100%;
+    }
 
-        @media (max-width: 550px) {
-            button {
-                padding: 2.5%;
-            }
+    .button {   
+        &:hover {
+            background-color: $background-color;
         }
     }
 

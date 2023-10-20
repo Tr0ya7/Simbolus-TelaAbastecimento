@@ -6,7 +6,7 @@ export default function Data(props) {
             <p>
                 { props.children }
             </p>
-            <PropInputMask mask="99-99-99" value={ props.value } maxLength="8" onChange={ props.onChange } />
+            <PropInputMask mask="9999-99-99" value={ props.value } maxLength="8" onChange={ props.onChange } />
         </div>
     )
 }

@@ -16,10 +16,9 @@ export default function MidInformations(props) {
         props.midInfo({
             km_hora: measure,
             qtde: quantity,
-            //km_hora: cost
         })
     }
-    
+
     return (
         <div className={styles.midInformations} onChange={ midInformationsOnChange }>
             <Measure value={measure} onChange={(event) => setMeasure(event.target.value)}>

@@ -1,7 +1,7 @@
 @import '../preDefinitions.scss';
 
 .midInformations {
-    @include display3;
+    @include displayMargin;
     justify-content: space-evenly;
     width: 50%;
     margin: 5% auto;
