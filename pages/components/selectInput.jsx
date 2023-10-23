@@ -1,19 +1,17 @@
 import styles from '@/styles/components/selectInput.module.scss'
 
-export default function SelectInput({ value, onChange, itens }) {
+export default function SelectInput(props) {
     return (
         <select 
             className={styles.select} 
-            value={value} 
-            onChange={onChange}
+            value={ props.value } 
+            onChange={ props.onChange }
             required
         >
             <option className={styles.defaultText} key='Selecione um valor' value="" hidden>
                 Selecione um valor
             </option>
-            {Array.isArray(itens) ? (
-                itens.map((item) => <option key={item.codigo}>{item}</option>)
-            ) : null}
+            { props.itens.map((item) => (<option key={item.codigo}>{item}</option>)) }
         </select>
     )
 }

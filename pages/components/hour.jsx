@@ -6,7 +6,7 @@ export default function Hour(props) {
             <p>
                 { props.children }
             </p>
-            <PropInputMask mask="99:99:99" value={ props.value } onChange={ props.onChange } />
+            <PropInputMask mask="99:99:99" value={ props.hour } onChange={ props.onChange } />
         </div>
     )
 }

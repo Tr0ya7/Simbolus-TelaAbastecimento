@@ -28,7 +28,7 @@ export default function Informations() {
             .then((res) => {
             if(res.ok) {
                 alert('Salvo')
-                setFormData('')
+                //setFormData('')
             }})
         } catch (err) {
             console.log(err)

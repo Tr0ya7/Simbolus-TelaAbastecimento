@@ -1,7 +1,7 @@
 import styles from '@/styles/components/loginInformations.module.scss'
 import PropButton from './propButton'
 import { useContext, useState } from 'react'
-import { UserContext } from '@/common'
+import { UserContext } from '../../common'
 import { useRouter } from 'next/router'
 import Cpf from './cpf'
 import Pass from './pass'
