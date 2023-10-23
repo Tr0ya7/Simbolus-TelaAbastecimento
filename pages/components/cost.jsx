@@ -1,4 +1,4 @@
-import PropInputMask from './propInputMask'
+import Input from './input'
 
 export default function Cost(props) {
     return (
@@ -6,7 +6,7 @@ export default function Cost(props) {
             <p>
                 {props.children}
             </p>
-            <PropInputMask mask="99,99" value={ props.value } onChange={ props.onChange } />
+            <Input mask="99,99" value={ props.value } onChange={ props.onChange } type="number" />
         </div>
     )
 }

@@ -1,9 +1,8 @@
-import styles from '@/styles/components/topInformations.module.scss'
 import { useContext, useEffect, useState } from 'react'
 import Employer from './employer'
 import Data from './data'
 import Hour from './hour'
-import { UserContext } from './common'
+import { UserContext } from '@/common'
 import TopInformationsSelectInput from './topInformationsSelectInput'
 import TopInformationsApiSelectInput from './topInformationsApiSelectInput'
 
@@ -118,9 +117,12 @@ export default function TopInformations(props) {
         suplyTypes = suply
     }
 
-    function topInformationsOnChange() {
-        props.topInfo({
+    useEffect(() => {
+        props.funId({
             fun_codigo: id,
+        })
+
+        props.topInfo({
             data: data,
             hora: hour,
             tipo: currentType,
@@ -128,21 +130,20 @@ export default function TopInformations(props) {
             bem_codigo: currentSuply.codigo,
             pro_codigo: currentFuel.codigo
         })
-    }
+    }, [id, data, hour, currentType, currentLocal, currentSuply, currentFuel])
 
     return (
-        <div className={styles.topInformations} onChange={ topInformationsOnChange }>
-            <Employer className={styles.main} value={id} onChange={(event) => setId(event.target.value)}>
+        <>
+            <Employer value={id} onChange={(event) => setId(event.target.value)}>
                 Funcionários
             </Employer>
-            <Data className={styles.main} value={data} onChange={(event) => setData(event.target.value)}>
+            <Data value={data} onChange={(event) => setData(event.target.value)}>
                 Data
             </Data>
-            <Hour className={styles.main} value={hour} onChange={(event) => setHour(event.target.value)}>
+            <Hour value={hour} onChange={(event) => setHour(event.target.value)}>
                 Hora
             </Hour>
             <TopInformationsSelectInput
-                className={styles.main}
                 itens={types}
                 value={type}
                 onChange={(event) => setType(event.target.value)}
@@ -150,29 +151,18 @@ export default function TopInformations(props) {
                 Tipo
             </TopInformationsSelectInput>
             <TopInformationsSelectInput 
-                className={styles.main} 
                 itens={locations} 
                 value={local} 
                 onChange={(event) => setLocal(event.target.value)}
             >
                 Local
             </TopInformationsSelectInput>
-            <TopInformationsApiSelectInput
-                className={styles.main}
-                itens={suplyTypes}
-                value={suplyTypes}
-                onChange={setCurrentSuply}
-            >
+            <TopInformationsApiSelectInput itens={suplyTypes} value={suplyTypes} onChange={setCurrentSuply}>
                 { vehicleText }
             </TopInformationsApiSelectInput>
-            <TopInformationsApiSelectInput
-                className={styles.main}
-                itens={fuel}
-                value={fuel}
-                onChange={setCurrentFuel}
-            >
+            <TopInformationsApiSelectInput itens={fuel} value={fuel} onChange={setCurrentFuel}>
                 Combustível
             </TopInformationsApiSelectInput>
-        </div>
+        </>
     )
 }

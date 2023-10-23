@@ -1,12 +1,11 @@
 import styles from '@/styles/components/loginInformations.module.scss'
 import PropButton from './propButton'
 import { useContext, useState } from 'react'
-import { UserContext } from './common'
+import { UserContext } from '@/common'
 import { useRouter } from 'next/router'
 import Cpf from './cpf'
 import Pass from './pass'
-import Image from 'next/image'
-import Link from 'next/link'
+import Logo from './logo'
 
 export default function LoginInformations() {
     var [currentCpf, setCurrentCpf] = useState('')
@@ -34,11 +33,7 @@ export default function LoginInformations() {
     return (
         <form className={styles.loginInformations} onSubmit={ login }>
             <div>
-                <Image 
-                    src="https://www.eletrotecnicamarmontel.com.br/imagens/logo.png" 
-                    width={300}
-                    height={80}
-                />
+                <Logo />
                 <Cpf value={currentCpf} onChange={setCurrentCpf}>
                     CPF do usuário
                 </Cpf>
@@ -46,14 +41,9 @@ export default function LoginInformations() {
                     Senha
                 </Pass>
             </div>
-            <Link href='./Recuperar-senha'>
-                <p className={styles.forgotPass}>
-                    Esqueci minha senha
-                </p>
-            </Link>
             <PropButton 
-                className={currentCpf.length === 11 || pass.length >= 1
-                    ? `${styles.button}` 
+                className={currentCpf === 11 || pass.length >= 1
+                    ? `${styles.button}`
                     : `${styles.disabledButton}`}
             >
                 Entrar

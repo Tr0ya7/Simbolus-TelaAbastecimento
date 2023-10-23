@@ -1,3 +1,4 @@
+import styles from '@/styles/components/employer.module.scss'
 import Input from "./input"
 
 export default function Employer (props) {
@@ -6,7 +7,7 @@ export default function Employer (props) {
             <p>
                 { props.children }
             </p>
-            <Input value={ props.value } onChange={ props.onChange } disabled />
+            <Input className={styles.input} value={ props.value } onChange={ props.onChange } disabled />
         </div>
     )
 }

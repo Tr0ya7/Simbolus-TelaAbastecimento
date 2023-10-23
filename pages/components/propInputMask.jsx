@@ -1,4 +1,4 @@
-import styles from '@/styles/components/input.module.scss'
+import styles from '@/styles/components/propInputMask.module.scss'
 import { InputMask } from 'primereact/inputmask'
 
 export default function PropInputMask(props) {

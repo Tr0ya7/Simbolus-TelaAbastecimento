@@ -22,7 +22,12 @@ export default function ApiSelectInput(props) {
     const itemsArray = Array.isArray(props.itens) ? props.itens : []
 
     return (
-        <select className={styles.select} value={selectedValue.descricao} onChange={handleSelectChange}>
+        <select 
+            className={styles.select} 
+            value={selectedValue.descricao} 
+            onChange={handleSelectChange} 
+            required
+        >
             <option className={styles.defaultText} value="" hidden>
                 Selecione um valor
             </option>

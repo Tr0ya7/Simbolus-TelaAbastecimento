@@ -7,7 +7,7 @@ export default function Measure(props) {
             <p>
                 { props.children }
             </p>
-            <Input value={ props.measure } onChange={ props.onChange } />
+            <Input value={ props.measure } onChange={ props.onChange } type="number" />
         </div>
     )
 }

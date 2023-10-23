@@ -2,15 +2,39 @@
 
 .informations {
     padding: 3em 3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    
+    section {
+        background-color: white;
+        border-radius: 7px;
+        padding: 40px;
 
-    .button {
-        text-align: center;
-        margin-top: 1.5em;
-    }
+        .text {
+            text-align: center;
+            color: gray;
+            font-size: 14px;
+        }
 
-    button {
-        &:active {
-            background-color: $background-color;
+        p {
+            font-weight: bold;
+            font-size: 14px;
+            margin: 16.5px 0 5px 0;
+        }
+
+        textarea {
+            width: 100%;
+        }
+        
+        button {
+            width: 100%;
+            margin-top: 10px;
+
+            &:hover {
+                background-color: $background-color;
+            }
         }
     }
 }

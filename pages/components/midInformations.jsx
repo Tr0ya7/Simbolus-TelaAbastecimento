@@ -1,6 +1,5 @@
-import styles from '@/styles/components/midInformations.module.scss'
-import { useContext, useState } from 'react'
-import { UserContext } from './common'
+import { useContext, useEffect, useState } from 'react'
+import { UserContext } from '../../common'
 import Cost from './cost'
 import Measure from './measure'
 import Quantity from './quantity'
@@ -12,15 +11,15 @@ export default function MidInformations(props) {
     const [cost, setCost] = useState('')
     var measureText = 'Quilometragem'
 
-    function midInformationsOnChange() {
+    useEffect(() => {
         props.midInfo({
             km_hora: measure,
             qtde: quantity,
         })
-    }
+    }, [measure, quantity])
 
     return (
-        <div className={styles.midInformations} onChange={ midInformationsOnChange }>
+        <div>
             <Measure value={measure} onChange={(event) => setMeasure(event.target.value)}>
                 {measureText = type === 'Gerador' ? 'Horimetro' : 'Quilometragem'}
             </Measure>
